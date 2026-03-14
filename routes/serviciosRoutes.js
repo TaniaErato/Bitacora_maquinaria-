@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const db = require("../bd");
 
 const serviciosController = require("../controllers/serviciosController");
 
