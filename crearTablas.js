@@ -1,5 +1,4 @@
-const db = require("./bd");
-
+const db = require("./config/db");
 const crearTablas = async () => {
   try {
     // 1. Clientes
