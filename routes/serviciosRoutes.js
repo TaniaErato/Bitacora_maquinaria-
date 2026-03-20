@@ -18,3 +18,4 @@ router.get("/init-db", async (req, res) => {
   await crearTablas();
   res.send("Base de datos inicializada");
 });
+
