@@ -1,11 +1,11 @@
 const mysql = require("mysql2");
 
-const pool = mysql.createPool({
-  uri: process.env.MYSQL_URL,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
+// Debug opcional (déjalo mientras pruebas)
+console.log("MYSQL_URL:", process.env.MYSQL_URL ? "OK" : "NO DEFINIDA");
 
-// Exportamos con promesas (async/await)
+// ✅ Crear pool usando la URL de Railway
+const pool = mysql.createPool(process.env.MYSQL_URL);
+
+// Exportar con promesas
 module.exports = pool.promise();
+
