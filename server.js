@@ -1,3 +1,5 @@
+console.log("ENV TEST:", process.env);
+
 const express = require("express");
 const cors = require("cors");
 

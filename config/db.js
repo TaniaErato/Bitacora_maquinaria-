@@ -1,11 +1,12 @@
 const mysql = require("mysql2");
 
-// Debug opcional (déjalo mientras pruebas)
-console.log("MYSQL_URL:", process.env.MYSQL_URL ? "OK" : "NO DEFINIDA");
+console.log("MYSQL_URL:", process.env.MYSQL_URL2 ? "OK" : "NO DEFINIDA");
 
-// ✅ Crear pool usando la URL de Railway
-const pool = mysql.createPool(process.env.MYSQL_URL);
+const pool = mysql.createPool({
+  uri: process.env.MYSQL_URL2,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
-// Exportar con promesas
 module.exports = pool.promise();
-
