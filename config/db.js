@@ -1,12 +1,12 @@
-const mysql = require("mysql2");
+const mysql = require('mysql2');
 
-console.log("MYSQL_URL:", process.env.MYSQL_URL2 ? "OK" : "NO DEFINIDA");
+const connectionString = process.env.MYSQL_DATABASE;
 
-const pool = mysql.createPool({
-  uri: process.env.MYSQL_URL2,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+if (!connectionString) {
+  console.error("❌ DATABASE NO DEFINIDA");
+  process.exit(1);
+}
 
-module.exports = pool.promise();
+const pool = mysql.createPool(connectionString);
+
+module.exports = pool;
