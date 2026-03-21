@@ -24,8 +24,8 @@ const crearTablas = async () => {
     await db.query(`
       CREATE TABLE IF NOT EXISTS servicios (
         id_servicio INT AUTO_INCREMENT PRIMARY KEY,
-        id_cliente INT,
-        id_sucursal INT,
+        id_cliente INT NULL,
+        id_sucursal INT NULL,
         trabajo_realizado TEXT,
         fecha DATETIME,
         estado VARCHAR(50),

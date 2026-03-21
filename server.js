@@ -1,12 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const pool = require("./config/db"); // 👈 IMPORTANTE
+const pool = require("./config/db");
+const crearTablas = require("./crearTablas");
 
 const serviciosRoutes = require("./routes/serviciosRoutes");
 
 const app = express();
 
-// 🔍 Logs de entorno
+// Logs
 console.log("🚀 INICIANDO SERVIDOR...");
 console.log("ENV MYSQL_DATABASE:", process.env.MYSQL_DATABASE);
 
@@ -14,26 +15,18 @@ console.log("ENV MYSQL_DATABASE:", process.env.MYSQL_DATABASE);
 app.use(cors());
 app.use(express.json());
 
-// Ruta de prueba
+// Crear tablas automáticamente
+crearTablas();
+
+// Ruta base
 app.get("/", (req, res) => {
   res.send("API Bitácora Maquinaria funcionando");
 });
 
-// Endpoint directo (opcional)
-app.get('/maquinaria', (req, res) => {
-  pool.query('SELECT * FROM maquinaria', (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: 'Error en la consulta' });
-    }
-    res.json(results);
-  });
-});
-
-// Rutas organizadas
+// Rutas
 app.use("/api", serviciosRoutes);
 
-// Puerto dinámico (Railway)
+// Puerto
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
