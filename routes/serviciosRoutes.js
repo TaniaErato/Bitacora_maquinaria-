@@ -107,8 +107,4 @@ router.delete('/clientes/:id', async (req, res) => {
   }
 });
 
-if (!nombre || !telefono) {
-  return res.status(400).json({ error: 'Datos incompletos' });
-}
-
 module.exports = router;
