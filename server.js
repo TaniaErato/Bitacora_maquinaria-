@@ -1,4 +1,6 @@
 console.log("ENV TEST:", process.env);
+console.log("🚀 INICIANDO SERVIDOR...");
+console.log("ENV MYSQL_DATABASE:", process.env.MYSQL_DATABASE);
 
 const express = require("express");
 const cors = require("cors");
