@@ -3,6 +3,8 @@ const router = express.Router();
 const pool = require("../config/db");
 
 
+
+
 router.get("/servicios", async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -76,3 +78,5 @@ router.post("/sucursales", async (req, res) => {
 
   res.json({ id: result.insertId });
 });
+
+module.exports = router;
