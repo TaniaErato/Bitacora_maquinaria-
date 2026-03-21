@@ -3,7 +3,7 @@ const cors = require("cors");
 const pool = require("./config/db");
 const crearTablas = require("./crearTablas");
 const errorHandler = require('./middlewares/errorHandler');
-app.use(errorHandler);
+
 
 const serviciosRoutes = require("./routes/serviciosRoutes");
 
@@ -16,6 +16,8 @@ console.log("ENV MYSQL_DATABASE:", process.env.MYSQL_DATABASE);
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(errorHandler);
+
 
 // Crear tablas automáticamente
 crearTablas();
