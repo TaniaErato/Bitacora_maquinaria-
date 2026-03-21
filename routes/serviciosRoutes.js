@@ -79,4 +79,36 @@ router.post("/sucursales", async (req, res) => {
   res.json({ id: result.insertId });
 });
 
+router.put('/clientes/:id', async (req, res) => {
+  try {
+    const { nombre, telefono, empresa } = req.body;
+    const { id } = req.params;
+
+    const [result] = await pool.query(
+      'UPDATE clientes SET nombre=?, telefono=?, empresa=? WHERE id_cliente=?',
+      [nombre, telefono, empresa, id]
+    );
+
+    res.json({ message: 'Cliente actualizado' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete('/clientes/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await pool.query('DELETE FROM clientes WHERE id_cliente=?', [id]);
+
+    res.json({ message: 'Cliente eliminado' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+if (!nombre || !telefono) {
+  return res.status(400).json({ error: 'Datos incompletos' });
+}
+
 module.exports = router;

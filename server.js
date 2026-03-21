@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./config/db");
 const crearTablas = require("./crearTablas");
+const errorHandler = require('./middlewares/errorHandler');
+app.use(errorHandler);
 
 const serviciosRoutes = require("./routes/serviciosRoutes");
 
