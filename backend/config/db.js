@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 console.log("🔍 Intentando leer variable de conexión...");
 
 // Cambiamos MYSQL_DATABASE por MYSQL_URL que tiene toda la info
-const connectionString = process.env.MYSQL_URL;
+const connectionString = process.env.MYSQL_DATABASE;
 
 console.log("📦 Usando Connection String:", connectionString ? "Cargada (Oculta por seguridad)" : "VACÍA ❌");
 
