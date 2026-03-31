@@ -10,20 +10,23 @@ const serviciosRoutes = require('./routes/serviciosRoutes');
 const app = express();
 
 // --- CONFIGURACIÓN DE CORS ---
-// Aquí agregamos tu URL de Vercel para que el celular pueda conectar
 const allowedOrigins = [
   'http://localhost:4200', 
-  'https://bitacora-frontend-theta.vercel.app/' // 👈 REEMPLAZA ESTO CON TU URL REAL DE VERCEL
+  'https://bitacora-frontend-theta.vercel.app' // URL corregida (sin el / al final)
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // permitir peticiones sin origen (como Postman o apps móviles nativas)
+    // Permitir peticiones sin origen (como Postman o apps móviles)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(new Error('El permiso CORS para este origen no está permitido'), false);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      // Log en consola del servidor para identificar el origen bloqueado si falla
+      console.error(`CORS bloqueado para el origen: ${origin}`);
+      callback(new Error('El permiso CORS para este origen no está permitido'));
     }
-    return callback(null, true);
   },
   credentials: true
 }));
@@ -47,7 +50,6 @@ app.get("/", (req, res) => {
 app.use("/api", serviciosRoutes);
 
 // --- MANEJO DE ERRORES ---
-// Activarlo ayuda a que si algo falla, el servidor no se detenga por completo
 app.use(errorHandler);
 
 // --- PUERTO ---
